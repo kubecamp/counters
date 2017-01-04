@@ -39,10 +39,12 @@ var (
 func main() {
 	fmt.Println("Counters - Redis")
 	redisAddr := os.Getenv("REDIS_URL")
+	password := os.Getenv("REDIS_PASSWORD")
+	fmt.Println(password)
 	client = redis.NewClient(&redis.Options{
 		Addr:     redisAddr,
-		Password: "", // no password set
-		DB:       0,  // use default DB
+		Password: password, // no password set
+		DB:       0,        // use default DB
 	})
 
 	http.HandleFunc("/", counterHandler)     // set router
